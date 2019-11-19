@@ -1,13 +1,13 @@
 {% extends 'login/login_base.html' %}
   {% block title %}Attendance App{% endblock %}
- 
+
   {% block msg3 %}{{incorrectpass}}{{notexist}}{{password_changed}}{% endblock %}
   {% block pass_ch %}{{password_changed}}{% endblock %}
 
   {% block content %}
 	<form action="/login/" method="POST">
 		<div class="wrapper">
-			<input class="input" type="text" name=enroll_no style="top: 30px" placeholder="Enrollment Number">
+			<input class="input" type="text" name=enroll_no style="top: 30px" placeholder="Enrollment Number" autocomplete="off">
 			<span class="underline" style="top:83px"></span>
 
 			<input class="input" type="password" name=password style="top: 50px" placeholder="Password">

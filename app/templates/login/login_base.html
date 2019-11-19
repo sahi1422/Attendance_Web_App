@@ -1,12 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
-<html> 
+<html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% endblock %}</title>
   <link rel="stylesheet" type="text/css" href="/static/css/login.css">
 </head>
 <body>
-	
+
 <div class="split left">
 	<div class="centered">
 	</div>
@@ -26,7 +27,6 @@
 	</center>
 
 	<div class="centered">
-
        {% block content %}
 	    {% endblock %}
 	</div>

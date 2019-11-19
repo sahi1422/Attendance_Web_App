@@ -1,6 +1,6 @@
 {% extends 'login/login_base.html' %}
   {% block title %}Attendance App{% endblock %}
- 
+
   {% block msg3 %}{{incorrectotp}}{{charotp}}{% endblock %}
   {% block content %}
 	<form action="/otp/" method="POST">
@@ -18,7 +18,7 @@
 	<center>
 		<div style="color: red;font-family: 'Arvo';font-size: 15px;top: 55%;left: 28%;position: absolute">
 			<p id="some_div">
-				
+
 			</p>
 		</div>
 		<div style="font-family: 'Arvo';font-size: 15px;top: 63%;left: 45%;position: absolute">
@@ -31,7 +31,7 @@
 		window.location.href = "/login/";
 	}
 
-	var timeLeft = 20;
+	var timeLeft = 200;
 	var elem = document.getElementById('some_div');
 
 	var timerId = setInterval(countdown, 1000);

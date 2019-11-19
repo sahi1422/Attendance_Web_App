@@ -1,6 +1,6 @@
 {% extends 'index5.html' %}
 
-{% block navhead %}Hello student!{% endblock %}
+{% block navhead %}Hello {{student.name}}!{% endblock %}
 {% block title %}student_dashboard{% endblock %}
 
 <!-- gggggggggggggggggg -->
@@ -38,10 +38,10 @@
     <th>Attendance</th>
   </tr>
     {% for i in obj %}
-   
+
      <tr>
-     <td>{{i.subject}}</td>   
-     <td>{{i.teacher}}</td>  
+     <td>{{i.subject}}</td>
+     <td>{{i.teacher}}</td>
     <td>{{i.total}}</td>
     <td>{{i.present}}</td>
     <td>{{i.attendance}} %</td>
@@ -49,8 +49,8 @@
      </tr>
      {% endfor %}
 </tr>
- 
- <tr style="font-weight: bolder;"> 
+
+ <tr style="font-weight: bolder;">
   <td colspan="2"> AVERAGE :</td>
     <td>{{total_lectures}}</td>
     <td>{{student.total_present}}</td>

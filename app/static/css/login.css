@@ -3,13 +3,15 @@ body {
     color: black;
 }
 
+
 .split {
-    height: 100%;
-    width: 50%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    overflow-x: hidden;
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
 }
 
 .left {
@@ -44,7 +46,7 @@ body {
   width: 300px;
 }
 
-.input {
+ .input {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #CCC;
@@ -56,10 +58,10 @@ body {
   padding: 10px 0px;
   position: relative;
   width: 200px;
+}
 
-  &:focus {
-    outline: none;    
-  }
+input:focus{
+  outline: none;
 }
 
 input::-webkit-input-placeholder {

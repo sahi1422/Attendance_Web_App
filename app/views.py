@@ -128,7 +128,7 @@ def logout(request):
 		del request.session["parent"]
 	except:
 		pass
-		
+
 	return redirect("/login/")
 
 
@@ -149,8 +149,8 @@ def forgot_password(request):
 		if models.teacher.objects.filter(email=email).exists():
 			temp=random.randint(1000,5001)
 			request.session['otp']=temp
-			send_mail('Please verify you accout. OTP :- ' + str(temp),
-				'Here is the message.',
+			send_mail('Verify your credentials',
+				'Please verify you accout. OTP :- ' + str(temp),
 				settings.EMAIL_HOST_USER,
 				[email],
 				fail_silently=False)
@@ -158,8 +158,8 @@ def forgot_password(request):
 		elif models.student.objects.filter(email=email).exists():
 			temp=random.randint(1000,5001)
 			request.session['otp']=temp
-			send_mail('Please verify you accout. OTP :- ' + str(temp),
-				'Here is the message.',
+			send_mail('Verify your credentials',
+				'Please verify you accout. OTP :- ' + str(temp),
 				settings.EMAIL_HOST_USER,
 				[email],
 				fail_silently=False)
@@ -180,6 +180,8 @@ def otp(request):
 	except:
 		context['charotp']="Integers only!!"
 		return render(request,'login/otp.html',context)
+	print otp
+	print request.session["otp"]
 
 	if request.session["otp"]== otp:
 		print "entered"
@@ -215,7 +217,7 @@ def change_password(request):
 			context['mismatch']="Passwords do not match!"
 			return render(request,'login/change_password.html',context)
 	elif request.method=="GET":
-		return redirect('/login/');		
+		return redirect('/login/');
 
 
 @csrf_exempt
@@ -456,7 +458,7 @@ def fe1(request):
 				for present in status:
 					models.FE1.objects.filter(
 						student__enroll_no=present,
-						date=curr_week	
+						date=curr_week
 						).update(chemistry_m=1)
 				obj = models.total_lectures.objects.get()
 				obj.chemistry += 1
@@ -477,7 +479,7 @@ def fe1(request):
 				obj = models.total_lectures.objects.get()
 				obj.physics += 1
 				obj.fe1 += 1
-				obj.save()					
+				obj.save()
 				request.session['flag']=2
 			else:
 				request.session['flag']=1
@@ -625,7 +627,7 @@ def fe1(request):
 			request.session["not_exist"]="Oh..it seems this lecture is not scheduled on Friday!!"
 	else:
 		request.session["flag"]=2
-		request.session["not_exist"]="Oh..No lectures scheduled on Weekend,hi viaj,hi vijay!!"
+		request.session["not_exist"]="Oh..No lectures scheduled on Weekend,hi vijay!!"
 
 def se1(request):
 
@@ -644,7 +646,7 @@ def se1(request):
 				for present in status:
 					models.se1.objects.filter(
 						student__enroll_no=present,
-						date=curr_week	
+						date=curr_week
 						).update(coa_m=1)
 				obj = models.total_lectures.objects.get()
 				obj.coa += 1
@@ -665,7 +667,7 @@ def se1(request):
 				obj = models.total_lectures.objects.get()
 				obj.deld += 1
 				obj.se1 += 1
-				obj.save()					
+				obj.save()
 				request.session['flag']=2
 			else:
 				request.session['flag']=1
@@ -680,7 +682,7 @@ def se1(request):
 				obj = models.total_lectures.objects.get()
 				obj.mp += 1
 				obj.se1 += 1
-				obj.save()					
+				obj.save()
 				request.session['flag']=2
 			else:
 				request.session['flag']=1
@@ -739,7 +741,7 @@ def se1(request):
 				request.session['flag']=2
 			else:
 				request.session['flag']=1
-		
+
 		else:
 			request.session["flag"]=2
 			request.session["not_exist"]="Oh..it seems this lecture is not scheduled on Wednesday!!"
@@ -816,7 +818,7 @@ def se1(request):
 			request.session["not_exist"]="Oh..it seems this lecture is not scheduled on Friday!!"
 	else:
 		request.session["flag"]=2
-		request.session["not_exist"]="Oh..No lectures scheduled on Weekend,hi viaj!!"
+		request.session["not_exist"]="Oh..No lectures scheduled on Weekend!!"
 
 def te1(request):
 
@@ -835,7 +837,7 @@ def te1(request):
 				for present in status:
 					models.te1.objects.filter(
 						student__enroll_no=present,
-						date=curr_week	
+						date=curr_week
 						).update(toc_m=1)
 				obj = models.total_lectures.objects.get()
 				obj.toc += 1
@@ -856,7 +858,7 @@ def te1(request):
 				obj = models.total_lectures.objects.get()
 				obj.os += 1
 				obj.te1 += 1
-				obj.save()					
+				obj.save()
 				request.session['flag']=2
 			else:
 				request.session['flag']=1
@@ -871,7 +873,7 @@ def te1(request):
 				obj = models.total_lectures.objects.get()
 				obj.sdl += 1
 				obj.te1 += 1
-				obj.save()					
+				obj.save()
 				request.session['flag']=2
 			else:
 				request.session['flag']=1
@@ -930,7 +932,7 @@ def te1(request):
 				request.session['flag']=2
 			else:
 				request.session['flag']=1
-		
+
 		else:
 			request.session["flag"]=2
 			request.session["not_exist"]="Oh..it seems this lecture is not scheduled on Wednesday!!"
@@ -1007,13 +1009,13 @@ def te1(request):
 			request.session["not_exist"]="Oh..it seems this lecture is not scheduled on Friday!!"
 	else:
 		request.session["flag"]=2
-		request.session["not_exist"]="Oh..No lectures scheduled on Weekend,hi viaj!!"
+		request.session["not_exist"]="Oh..No lectures scheduled on Weekend!!"
 
 def be1(request):
 
 	division=request.session['div']
 	subject=request.session['sub'];
-	status=request.PsmdT.getlist('present_no')
+#	status=request.PsmdT.getlist('present_no')
 	dates=models.dates.objects.get()
 	sunday=dates.sunday
 	new_week=dates.new_week
@@ -1026,7 +1028,7 @@ def be1(request):
 				for present in status:
 					models.be1.objects.filter(
 						student__enroll_no=present,
-						date=curr_week	
+						date=curr_week
 						).update(ml_m=1)
 				obj = models.total_lectures.objects.get()
 				obj.ml += 1
@@ -1047,7 +1049,7 @@ def be1(request):
 				obj = models.total_lectures.objects.get()
 				obj.smd += 1
 				obj.be1 += 1
-				obj.save()					
+				obj.save()
 				request.session['flag']=2
 			else:
 				request.session['flag']=1
@@ -1062,7 +1064,7 @@ def be1(request):
 				obj = models.total_lectures.objects.get()
 				obj.ics += 1
 				obj.be1 += 1
-				obj.save()					
+				obj.save()
 				request.session['flag']=2
 			else:
 				request.session['flag']=1
@@ -1121,7 +1123,7 @@ def be1(request):
 				request.session['flag']=2
 			else:
 				request.session['flag']=1
-		
+
 		else:
 			request.session["flag"]=2
 			request.session["not_exist"]="Oh..it seems this lecture is not scheduled on Wednesday!!"
@@ -1194,13 +1196,13 @@ def be1(request):
 			else:
 				request.session['flag']=1
 
-		
+
 		else:
 			request.session["flag"]=2
 			request.session["not_exist"]="Oh..it seems this lecture is not scheduled on Friday!!"
 	else:
 		request.session["flag"]=2
-		request.session["not_exist"]="Oh..No lectures scheduled on Weekend,hi viaj!!"
+		request.session["not_exist"]="Oh..No lectures scheduled on Weekend!!"
 
 
 @csrf_exempt
@@ -1338,7 +1340,7 @@ def calculate_attendance(request):
 	present_sub3 = student.sub3_present
 	present = present_sub1 + present_sub2 + present_sub3
 	student.total_present = present
-		
+
 	total=0
 	obj = models.total_lectures.objects.get()
 
@@ -1370,7 +1372,7 @@ def calculate_attendance(request):
 	student.avg_attendance = (present*100)/total
 	student.save()
 
- 
+
 @csrf_exempt
 def register_teacher(request):
 	context={}
@@ -1401,7 +1403,7 @@ def register_teacher(request):
 				context['success']="Teacher registration successful."
 				return render(request,'register_teacher.html',context);
 
-			else:	
+			else:
 
 				context['same_teacher']="Name should match for registered Enrollment no "
 				return render(request,'register_teacher.html',context);
@@ -1547,7 +1549,7 @@ def weekly_stats(request):
 
 	if division== 'FE1':
 		obj_list = models.FE1.objects.filter(student__enroll_no = enroll_no)
-		for i in obj_list: 
+		for i in obj_list:
 			pcount = 0
 			tcount=0
 			if i.physics_m ==1:
@@ -1605,7 +1607,7 @@ def weekly_stats(request):
 
 	elif division== 'SE1':
 		obj_list = models.SE1.objects.filter(student__enroll_no = enroll_no)
-		for i in obj_list: 
+		for i in obj_list:
 			pcount = 0
 			tcount=0
 			if i.deld_m ==1:
@@ -1638,7 +1640,7 @@ def weekly_stats(request):
 				tcount+=1
 			else:
 				tcount +=1
-			
+
 			if i.coa_th ==1:
 				pcount +=1
 				tcount+=1
@@ -1669,7 +1671,7 @@ def weekly_stats(request):
 
 	elif division== 'TE1':
 		obj_list = models.TE1.objects.filter(student__enroll_no = enroll_no)
-		for i in obj_list: 
+		for i in obj_list:
 			pcount = 0
 			tcount=0
 			if i.os_m ==1:
@@ -1702,7 +1704,7 @@ def weekly_stats(request):
 				tcount+=1
 			else:
 				tcount +=1
-			
+
 			if i.toc_th ==1:
 				pcount +=1
 				tcount+=1
@@ -1733,7 +1735,7 @@ def weekly_stats(request):
 
 	elif division== 'BE1':
 		obj_list = models.BE1.objects.filter(student__enroll_no = enroll_no)
-		for i in obj_list: 
+		for i in obj_list:
 			pcount = 0
 			tcount=0
 			if i.smd_m ==1:
@@ -1766,7 +1768,7 @@ def weekly_stats(request):
 				tcount+=1
 			else:
 				tcount +=1
-			
+
 			if i.ml_th ==1:
 				pcount +=1
 				tcount+=1
@@ -1794,7 +1796,7 @@ def weekly_stats(request):
 				tcount +=1
 			i.weekly_attendance = (pcount*100/tcount)
 			i.save()
-			
+
 
 	prev_weeks= []
 
@@ -1818,7 +1820,7 @@ def weekly_stats(request):
 
 	student = models.student.objects.get(enroll_no = enroll_no)
 	line_chart.add(student.name, values)
-	line_chart.render_to_file('/home/sahil/proj3/app/static/graph/weekly_attendance.svg')
+	line_chart.render_to_file('/home/sahil/PYTHON-DJANGO/Attendance_WEB_APP/app/static/graph/weekly_attendance.svg')
 
 	context={}
 	context['student']= student
@@ -1827,7 +1829,7 @@ def weekly_stats(request):
 	elif 'parent'in request.session:
 		return render(request,'weekly_analysis_parent.html',context)
 
-	
+
 @csrf_exempt
 def show_students(request):
 	division = request.GET['division']
@@ -1841,7 +1843,7 @@ def show_students(request):
 	if division == "FE1":
 		if subject == "physics":
 			context['sub_total'] = models.total_lectures.objects.get().physics
-			
+
 			for i in students:
 				temp = {}
 				temp['student']= i
@@ -1871,7 +1873,7 @@ def show_students(request):
 	if division == "SE1":
 		if subject == "deld":
 			context['sub_total'] = models.total_lectures.objects.get().deld
-			
+
 			for i in students:
 				temp = {}
 				temp['student']= i
@@ -1901,7 +1903,7 @@ def show_students(request):
 	if division == "TE1":
 		if subject == "toc":
 			context['sub_total'] = models.total_lectures.objects.get().toc
-			
+
 			for i in students:
 				temp = {}
 				temp['student']= i
@@ -1931,7 +1933,7 @@ def show_students(request):
 	if division == "BE1":
 		if subject == "ml":
 			context['sub_total'] = models.total_lectures.objects.get().ml
-			
+
 			for i in students:
 				temp = {}
 				temp['student']= i
@@ -1985,7 +1987,7 @@ def register_student(request):
 		if models.student.objects.filter(enroll_no=Enroll_no).exists():
 			context['duplicate_enroll']="Enrollment no must be unique"
 			return render(request,'register_student.html',context);
-		else:	
+		else:
 			obj1=models.student(
 				enroll_no=Enroll_no,
 				name=Name,password=Password,
@@ -1994,7 +1996,3 @@ def register_student(request):
 			obj1.save()
 			context['success']="Student registration successful."
 			return render(request,'register_student.html',context);
-
-
-		
-
